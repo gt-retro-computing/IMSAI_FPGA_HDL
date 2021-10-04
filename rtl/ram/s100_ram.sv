@@ -27,10 +27,24 @@ output reg o_rd_ready;
 
 output reg o_busy = 0;
 
+parameter DEPTH = 1 << 8;
+reg [8:0] memory[DEPTH];
 
 always @(posedge i_clk) begin
-    
-end
+  if (i_reset) begin
+    for (integer i = 0; i < DEPTH; i++) begin
+      memory[i] = 0;
+    end
+  else begin
+    if (i_wr_enable) begin
+      memory[i_wr_addr] = o_wr_data;
+    end
 
+    if (i_rd_enable) begin
+      o_rd_data = memory[i_rd_addr];
+    end
+  end
+
+end
 
 endmodule
