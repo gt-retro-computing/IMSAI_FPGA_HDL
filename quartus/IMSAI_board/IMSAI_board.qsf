@@ -47,15 +47,36 @@ set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
 set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 1
 set_global_assignment -name NOMINAL_CORE_SUPPLY_VOLTAGE 1.2V
-set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/IMSAI_board.sv
-set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/uart/uart_tx.sv
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_location_assignment PIN_T2 -to i_clk
-set_location_assignment PIN_W13 -to i_reset
 set_location_assignment PIN_Y13 -to i_key1
 set_location_assignment PIN_R1 -to o_uart_tx
+set_global_assignment -name ENABLE_OCT_DONE OFF
+set_global_assignment -name USE_CONFIGURATION_DEVICE OFF
+set_global_assignment -name CRC_ERROR_OPEN_DRAIN OFF
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS_WEAK_PULLUP "AS INPUT TRI-STATED"
+set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -rise
+set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -fall
+set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -rise
+set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -fall
+set_location_assignment PIN_W13 -to i_reset_n
+set_location_assignment PIN_M20 -to o_addr_en_n
+set_location_assignment PIN_N20 -to o_di_en_n
+set_location_assignment PIN_B22 -to o_do_en_n
+set_location_assignment PIN_A20 -to o_sts_en_n
+set_location_assignment PIN_A16 -to o_hold_n
+set_location_assignment PIN_A19 -to o_int_n
+set_location_assignment PIN_A15 -to o_phantom_n
+set_location_assignment PIN_A17 -to o_rdy
+set_location_assignment PIN_A18 -to o_xrdy
+set_location_assignment PIN_A7 -to i_memr
+set_global_assignment -name IP_SEARCH_PATHS "c:\\users\\devbox\\projects\\gt-retro-computing\\imsai_fpga_verilog\\quartus\\imsai_board\\entites"
+set_global_assignment -name QSYS_FILE entites/uart_debug.qsys
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/IMSAI_board.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/uart/uart_tx.sv
+set_global_assignment -name SOURCE_FILE UART.spf
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
