@@ -1,0 +1,15 @@
+Info: Starting: Create HDL design files for synthesis
+Info: qsys-generate C:\Users\devbox\projects\gt-retro-computing\IMSAI_FPGA_Verilog\quartus\IMSAI_board\entites\uart_debug.qsys --synthesis=VERILOG --output-directory=C:\Users\devbox\projects\gt-retro-computing\IMSAI_FPGA_Verilog\quartus\IMSAI_board\entites\uart_debug\synthesis --family="Cyclone IV E" --part=EP4CE15F23C8
+Progress: Loading entites/uart_debug.qsys
+Progress: Reading input file
+Progress: Adding in_system_sources_probes_0 [altera_in_system_sources_probes 18.0]
+Progress: Parameterizing module in_system_sources_probes_0
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: uart_debug: Generating uart_debug "uart_debug" for QUARTUS_SYNTH
+Info: in_system_sources_probes_0: "uart_debug" instantiated altera_in_system_sources_probes "in_system_sources_probes_0"
+Info: uart_debug: Done "uart_debug" with 2 modules, 2 files
+Info: qsys-generate succeeded.
+Info: Finished: Create HDL design files for synthesis
