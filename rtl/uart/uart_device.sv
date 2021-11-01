@@ -61,6 +61,26 @@ wire [7:0] status_word = {
     8'h0
 };
 
+wire [15:0] txFIFO_status;
+wire txFIFO_err;
+wire [7:0] txFIFO_o_data;
+wire txFIFO_empty_n;
+reg txFIFO_rd = 0;
+wire txFIFO_wr;
+
+ufifo #(.RXFIFO(0'b1)) txFIFO
+(
+    .i_clk(i_clk),
+    .i_reset(i_reset),
+    .i_wr(txFIFO_wr),
+    .i_data(i_wb_data),
+    .o_empty_n(txFIFO_empty_n),
+    .i_rd(txFIFO_rd),
+    .o_data(txFIFO_o_data),
+    .o_status(txFIFO_status),
+    .o_err(txFIFO_err)
+);
+
 // Wishbone IO FSM
 localparam  WB_IDLE = 0,
             WB_WRITE = 1;
@@ -79,6 +99,9 @@ always @(posedge i_clk) begin
     // end 
 end
 
+// TX FIFO Write
+assign txFIFO_wr = (wb_state == WB_IDLE) && i_wb_cyc && i_wb_stb && i_wb_we && (i_wb_addr == 1);
+
 // wb_stall
 always @(*) begin
     o_wb_stall = wb_state != WB_IDLE;
@@ -87,6 +110,8 @@ end
 // Mux for wb_ack
 always @(*) begin
     if (wb_read) 
+        o_wb_ack = 1;
+    else if (txFIFO_wr)
         o_wb_ack = 1;
     else
         o_wb_ack = 0;
